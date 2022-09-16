@@ -1,0 +1,19 @@
+  /* Firefox */
+  .scrollbar {
+    scrollbar-width: auto;
+    scrollbar-color: #8f54a0 #ffffff;
+  }
+
+  .scrollbar::-webkit-scrollbar {
+    width: 0;
+  }
+
+  .scrollbar::-webkit-scrollbar-track {
+    background: #ffffff;
+  }
+
+  .scrollbar::-webkit-scrollbar-thumb {
+    background-color: #8f54a0;
+    border-radius: 10px;
+    border: 0px solid #ffffff;
+  }
