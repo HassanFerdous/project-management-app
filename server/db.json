@@ -1,0 +1,54 @@
+{
+  "users": [
+    {
+      "email": "ferdous@gmail.com",
+      "password": "$2a$10$CtzgN2Hbub0WVq24WwXyEuy9eNp5VR/cRcLvxPvlb0cKnEGblOU8a",
+      "name": "ferdous",
+      "id": 1
+    },
+    {
+      "email": "test@gmail.com",
+      "password": "$2a$10$xyzMftznyRS8ev51p2qf7eU4vpZsconpIe4Ylcop9ukUxOLM6.8NC",
+      "name": "test",
+      "id": 2
+    },
+    {
+      "email": "test1@gmail.com",
+      "password": "$2a$10$5ivfW/a0K5nQFg2BC9AH/es9b7XdwXtCut/cevaPNtBlOqPMTQxBW",
+      "name": "test1",
+      "id": 3
+    },
+    {
+      "email": "test2@gmail.com",
+      "password": "$2a$10$MdHogq5Wdhasy6z.6Gze5u9cftdwZ0zc2dPWvUNE.yoR8ah4mKM3.",
+      "name": "test2",
+      "id": 4
+    },
+    {
+      "email": "john@gmail.com",
+      "password": "$2a$10$pQGX2Mn.QfOqk8Ks4aOkfefxfo/rZxKz4ySnfQbUt2qO46AP269Se",
+      "name": "john",
+      "id": 5
+    },
+    {
+      "email": "mike@gmail.com",
+      "password": "$2a$10$j3a9IAsSDLRXwHvK4JzHbe3CnKi3l3SF0SM4jA9hxXlsaoNB20B4O",
+      "name": "mike",
+      "id": 6
+    },
+    {
+      "email": "ryan@gmail.com",
+      "password": "$2a$10$TOMR1jReRJx7MeM0GukSp.eK5fIyTZacri7qX5p1l9G3tKf5WhS66",
+      "name": "ryan",
+      "id": 7
+    },
+    {
+      "email": "boo@gmail.com",
+      "password": "$2a$10$gfZSE0dkv.pJex0odMCHL.cMrDx2m6AwbN5RSxN9Wu5PYR0Bl9NmW",
+      "name": "boo",
+      "id": 8
+    }
+  ],
+  "teams": [],
+  "projects": []
+}

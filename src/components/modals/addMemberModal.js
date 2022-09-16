@@ -36,16 +36,16 @@ export default function AddMemberModal({ toggleModal }) {
 	};
 
 	return (
-		<form className='absolute top-0 right-0 w-4/6 p-4 bg-white' onSubmit={handleSubmit} ref={ref}>
+		<form className='absolute top-0 right-0 w-4/6 p-4 bg-white shadow-md' onSubmit={handleSubmit} ref={ref}>
 			<AsyncSelect loadOptions={debounce(loadOption, 500)} placeholder='Type email' onChange={handleChange} />
 			<div className='text-center text-right mt-2 flex'>
 				<button
-					className='inline-block w-auto px-2 py-1 py-2 bg-green-300 rounded font-semibold text-sm order-1 text-xs'
+					className='inline-block w-auto px-2 py-1 py-2 bg-green-300 rounded font-semibold text-sm order-1 text-xs leading-3'
 					type='submit'>
 					Add
 				</button>
 				<button
-					className='ml-2 inline-block w-auto px-2 py-1 py-1 bg-red-300 rounded font-semibold text-sm order-1 text-xs'
+					className='ml-2 inline-block w-auto px-2 py-1 py-1 bg-red-300 rounded font-semibold text-sm order-1 text-xs leading-3'
 					type='button'
 					onClick={toggleModal}>
 					Cancel

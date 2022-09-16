@@ -22,7 +22,7 @@ const Projects = () => {
 						placeholder='Search for anything…'
 					/>
 					<div className='ml-10 grow'>
-						<Link className='mx-2 text-sm font-semibold text-gray-600 hover:text-indigo-700' to='/teams'>
+						<Link className='mx-2 text-sm font-semibold text-gray-600 hover:text-indigo-700' to='/'>
 							Team
 						</Link>
 						<Link className='mx-2 text-sm font-semibold text-indigo-700' to='/projects'>
