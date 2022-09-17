@@ -37,7 +37,12 @@ export default function AddMemberModal({ toggleModal }) {
 
 	return (
 		<form className='absolute top-0 right-0 w-4/6 p-4 bg-white shadow-md' onSubmit={handleSubmit} ref={ref}>
-			<AsyncSelect loadOptions={debounce(loadOption, 500)} placeholder='Type email' onChange={handleChange} />
+			<AsyncSelect
+				loadOptions={debounce(loadOption, 500)}
+				placeholder='Type email'
+				onChange={handleChange}
+				className='text-xs'
+			/>
 			<div className='text-center text-right mt-2 flex'>
 				<button
 					className='inline-block w-auto px-2 py-1 py-2 bg-green-300 rounded font-semibold text-sm order-1 text-xs leading-3'
