@@ -49,6 +49,70 @@
       "id": 8
     }
   ],
-  "teams": [],
+  "teams": [
+    {
+      "name": "dev",
+      "title": "hello dev",
+      "author": {
+        "email": "ferdous@gmail.com",
+        "name": "ferdous",
+        "id": 1
+      },
+      "members": [
+        "ferdous@gmail.com",
+        "test@gmail.com",
+        "test1@gmail.com",
+        "john@gmail.com",
+        "mike@gmail.com",
+        "ryan@gmail.com",
+        "boo@gmail.com",
+        "test2@gmail.com"
+      ],
+      "createdAt": "2022-09-17T07:05:24.596Z",
+      "id": 2
+    },
+    {
+      "name": "development",
+      "title": "hello world",
+      "author": {
+        "email": "ferdous@gmail.com",
+        "name": "ferdous",
+        "id": 1
+      },
+      "members": [
+        "ferdous@gmail.com"
+      ],
+      "createdAt": "2022-09-17T07:14:30.991Z",
+      "id": 3
+    },
+    {
+      "name": "marketing",
+      "title": "hello marketing",
+      "author": {
+        "email": "ferdous@gmail.com",
+        "name": "ferdous",
+        "id": 1
+      },
+      "members": [
+        "ferdous@gmail.com"
+      ],
+      "createdAt": "2022-09-17T07:15:37.449Z",
+      "id": 4
+    },
+    {
+      "name": "SEO",
+      "title": "hello world",
+      "author": {
+        "email": "ferdous@gmail.com",
+        "name": "ferdous",
+        "id": 1
+      },
+      "members": [
+        "ferdous@gmail.com"
+      ],
+      "createdAt": "2022-09-17T07:16:39.745Z",
+      "id": 5
+    }
+  ],
   "projects": []
 }

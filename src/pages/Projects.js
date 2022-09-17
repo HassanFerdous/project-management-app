@@ -8,8 +8,8 @@ import Avatar from '../components/Avatar';
 
 const Projects = () => {
 	const [showModal, setShowModal] = useState(false);
-	const toggleModal = () => {
-		setShowModal(!showModal);
+	const control = (value) => {
+		setShowModal(value);
 	};
 	return (
 		<>
@@ -43,7 +43,7 @@ const Projects = () => {
 							</span>
 							<button
 								className='flex items-center justify-center w-6 h-6 ml-auto text-indigo-500 rounded hover:bg-indigo-500 hover:text-indigo-100'
-								onClick={toggleModal}>
+								onClick={() => control(!showModal)}>
 								<svg className='w-5 h-5' fill='none' viewBox='0 0 24 24' stroke='currentColor'>
 									<path
 										strokeLinecap='round'
@@ -136,7 +136,7 @@ const Projects = () => {
 					<div className='flex-shrink-0 w-6' />
 				</div>
 			</div>
-			{showModal && <AddProjectModal toggleModal={toggleModal} />}
+			{showModal && <AddProjectModal control={control} />}
 			<SiteLogo />
 		</>
 	);

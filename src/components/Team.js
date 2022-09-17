@@ -1,13 +1,25 @@
 import React from 'react';
 import { useState } from 'react';
 import AddMemberModal from './modals/addMemberModal';
+import moment from 'moment';
 
-export default function Team() {
+function stringToHslColor(str, s = 40, l = 60) {
+	var hash = 0;
+	for (var i = 0; i < str.length; i++) {
+		hash = str.charCodeAt(i) + ((hash << 5) - hash);
+	}
+
+	var h = hash % 360;
+	return 'hsl(' + h + ', ' + s + '%, ' + l + '%)';
+}
+export default function Team({ team }) {
 	const [showAddMemberForm, setShowAddMemberForm] = useState(false);
+	const { name, title, createdAt, members, id } = team || {};
 
 	const toggleAddMemberForm = () => {
 		setShowAddMemberForm(!showAddMemberForm);
 	};
+
 	return (
 		<div
 			className='relative flex flex-col items-start p-4 mt-3 bg-white rounded-lg cursor-pointer bg-opacity-90 group hover:bg-opacity-100'
@@ -23,12 +35,23 @@ export default function Team() {
 					<path d='M10 6a2 2 0 110-4 2 2 0 010 4zM10 12a2 2 0 110-4 2 2 0 010 4zM10 18a2 2 0 110-4 2 2 0 010 4z' />
 				</svg>
 			</button>
-			<span className='flex items-center h-6 px-3 text-xs font-semibold text-pink-500 bg-pink-100 rounded-full'>
-				Design
+			<span
+				className='flex items-center h-6 px-3 text-xs font-semibold text-pink-500 bg-pink-100 rounded-full'
+				style={{ backgroundColor: stringToHslColor(name, 30, 90), color: stringToHslColor(name, 80, 60) }}>
+				{name}
 			</span>
-			<h4 className='mt-3 text-sm font-medium'>
-				This is the title of the card for the thing that needs to be done.
-			</h4>
+			<div className='members mt-2 flex items-center flex-wrap'>
+				{members.map((member, idx) => {
+					return (
+						<div
+							className='member uppercase w-8 h-8 rounded-full text-center leading-8 bg-orange-300 mr-1'
+							key={idx}>
+							{member?.split('@')[0].slice(0, 2)}
+						</div>
+					);
+				})}
+			</div>
+			<h4 className='mt-3 text-sm font-medium'>{title}</h4>
 			<div className='flex items-center w-full mt-3 text-xs font-medium text-gray-400'>
 				<div className='flex items-center'>
 					<svg
@@ -42,11 +65,11 @@ export default function Team() {
 							clipRule='evenodd'
 						/>
 					</svg>
-					<span className='ml-1 leading-none'>Dec 12</span>
+					<span className='ml-1 leading-none'>{moment(createdAt).format('MMM Do YY')}</span>
 				</div>
 			</div>
 
-			{showAddMemberForm && <AddMemberModal toggleModal={toggleAddMemberForm} />}
+			{showAddMemberForm && <AddMemberModal toggleModal={toggleAddMemberForm} members={members} teamId={id} />}
 		</div>
 	);
 }

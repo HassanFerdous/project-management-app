@@ -1,10 +1,10 @@
 import React from 'react';
 import { useRef } from 'react';
 import { useOnClickOutside } from '../../utils';
-function Modal({ toggleModal, children }) {
+function Modal({ control, children }) {
 	const ref = useRef();
 	useOnClickOutside(ref, () => {
-		toggleModal();
+		control(false);
 	});
 
 	return (

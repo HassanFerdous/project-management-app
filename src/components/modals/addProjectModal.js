@@ -1,9 +1,9 @@
 import Input from '../Input';
 import Modal from './modal';
 
-function AddProjectModal({ toggleModal }) {
+function AddProjectModal({ control }) {
 	return (
-		<Modal toggleModal={toggleModal}>
+		<Modal control={control}>
 			<form>
 				<Input type='text' placeholder='Project Name' required />
 				<Input type='text' placeholder='Title' required />
@@ -16,7 +16,7 @@ function AddProjectModal({ toggleModal }) {
 					<button
 						className='ml-2 inline-block w-auto px-4 py-3 py-2 bg-red-300 rounded-lg font-semibold text-sm mt-4 mt-0 order-1'
 						type='button'
-						onClick={toggleModal}>
+						onClick={() => control(false)}>
 						Cancel
 					</button>
 				</div>

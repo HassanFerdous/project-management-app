@@ -13,9 +13,9 @@ server.use(middlewares);
 
 const rules = auth.rewriter({
 	// Permission rules
-	users: 600,
-	teams: 600,
-	projects: 600,
+	users: 640,
+	teams: 660,
+	projects: 660,
 });
 
 const port = process.env.PORT || 9000;
