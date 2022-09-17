@@ -11,6 +11,7 @@ const Projects = () => {
 	const control = (value) => {
 		setShowModal(value);
 	};
+
 	return (
 		<>
 			<div className='flex flex-col w-screen h-screen overflow-auto text-gray-700 bg-gradient-to-tr from-blue-200 via-indigo-200 to-pink-200'>
@@ -22,8 +23,8 @@ const Projects = () => {
 						placeholder='Search for anything…'
 					/>
 					<div className='ml-10 grow'>
-						<Link className='mx-2 text-sm font-semibold text-gray-600 hover:text-indigo-700' to='/'>
-							Team
+						<Link className='mx-2 text-sm font-semibold text-gray-600 hover:text-indigo-700' to='/teams'>
+							Teams
 						</Link>
 						<Link className='mx-2 text-sm font-semibold text-indigo-700' to='/projects'>
 							Projects

@@ -1,5 +1,5 @@
 import React from 'react';
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
 import PrivateRoute from './components/PrivateRout';
 import useAuthCheck from './hooks/useAuthCheck';
 import Login from './pages/Login';
@@ -14,7 +14,7 @@ function App() {
 			<Router>
 				<Routes>
 					<Route
-						path='/'
+						path='/teams'
 						element={
 							<PrivateRoute>
 								<Teams />
@@ -29,7 +29,7 @@ function App() {
 							</PrivateRoute>
 						}
 					/>
-					<Route path='/login' element={<Login />} />
+					<Route path='/' element={!authChecked ? <Login /> : <Navigate to='/teams' replace={true} />} />
 				</Routes>
 			</Router>
 		</>

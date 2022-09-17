@@ -1,21 +1,11 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
 import { useLoginMutation } from '../features/auth/authApi';
-import useAuth from '../hooks/useAuth';
 import logoLws from '../images/logo.png';
 function Login() {
 	const [email, setEmail] = useState('');
 	const [password, setPassword] = useState('');
 	const [login, { isLoading }] = useLoginMutation();
-	const navigate = useNavigate();
-	let isLoggedIn = useAuth();
-
-	useEffect(() => {
-		if (isLoggedIn) {
-			navigate('/', { replace: true });
-		}
-	}, [isLoggedIn, navigate]);
 
 	const handleSubmit = (e) => {
 		e.preventDefault();

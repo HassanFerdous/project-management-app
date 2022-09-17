@@ -60,7 +60,7 @@ export default function AddMemberModal({ toggleModal, members, teamId }) {
 	const handleSubmit = (e) => {
 		e.preventDefault();
 		//handle empty value
-		if (!selectedMember?.value?.trim().length) return;
+		if (!selectedMember?.value?.trim().length || members.includes(selectedMember?.value)) return;
 		updatedTeam({ id: teamId, members: [...members, selectedMember?.value] });
 		toggleModal();
 	};
@@ -68,9 +68,10 @@ export default function AddMemberModal({ toggleModal, members, teamId }) {
 	return (
 		<form className='absolute top-0 right-0 w-4/6 p-4 bg-white shadow-md' onSubmit={handleSubmit} ref={ref}>
 			<AsyncSelect
-				noOptionsMessage={() => ''}
+				noOptionsMessage={() => 'not found'}
 				defaultOptions={defaultOptions}
 				backspaceRemovesValue={true}
+				loadingMessage={() => 'searching...'}
 				loadOptions={debounce(loadOption, 500)}
 				hideSelectedOptions={true}
 				placeholder='Type email'
