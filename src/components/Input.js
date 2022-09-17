@@ -7,6 +7,7 @@ export default function Input(props) {
 			placeholder={placeholder}
 			onChange={onChange}
 			value={others?.value}
+			name={others?.name}
 		/>
 	);
 }

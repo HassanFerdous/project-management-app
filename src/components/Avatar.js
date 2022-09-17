@@ -16,7 +16,7 @@ export default function Avatar() {
 	//logout
 	const handleLogOut = () => {
 		dispatch(logout());
-		navigate('/login', { replace: true });
+		navigate('/', { replace: true });
 	};
 
 	//click-outside

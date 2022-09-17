@@ -127,7 +127,8 @@
       "members": [
         "ferdous@gmail.com",
         "john@gmail.com",
-        "test2@gmail.com"
+        "test2@gmail.com",
+        "mike@gmail.com"
       ],
       "createdAt": "2022-09-17T09:34:58.823Z",
       "id": 6
@@ -164,5 +165,18 @@
       "id": 8
     }
   ],
-  "projects": []
+  "projects": [
+    {
+      "author": "ferdous@gmail.com",
+      "members": [
+        "ferdous@gmail.com"
+      ],
+      "stage": "ready",
+      "name": "todo",
+      "title": "todo application",
+      "avatar": "sdfsdfsdfsdf",
+      "createdAt": "2022-09-17T16:56:24.424Z",
+      "id": 4
+    }
+  ]
 }

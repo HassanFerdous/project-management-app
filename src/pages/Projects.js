@@ -5,12 +5,41 @@ import Project from '../components/Project';
 import AddProjectModal from '../components/modals/addProjectModal';
 import { useState } from 'react';
 import Avatar from '../components/Avatar';
+import { useFetchProjectsQuery } from '../features/project/projectApi';
+import { useSelector } from 'react-redux';
+import { useEffect } from 'react';
 
 const Projects = () => {
 	const [showModal, setShowModal] = useState(false);
+	const [columns, setColumns] = useState({ backlog: [], ready: [], doing: [], review: [], blocked: [], done: [] });
+	const { email: loggedInUserEmail } = useSelector((state) => state?.auth?.user) || {};
+	const {
+		data: projects,
+		isSuccess,
+		isError,
+	} = useFetchProjectsQuery({ email: loggedInUserEmail, sort: 'id', order: 'desc' });
+
 	const control = (value) => {
 		setShowModal(value);
 	};
+
+	const filterProjectByStage = (stage) => {
+		return (project) => project.stage === stage;
+	};
+
+	useEffect(() => {
+		if (!isError && isSuccess) {
+			setColumns({
+				backlog: projects?.filter(filterProjectByStage('backlog')),
+				ready: projects?.filter(filterProjectByStage('ready')),
+				doing: projects?.filter(filterProjectByStage('doing')),
+				review: projects?.filter(filterProjectByStage('review')),
+				blocked: projects?.filter(filterProjectByStage('blocked')),
+				done: projects?.filter(filterProjectByStage('done')),
+			});
+		}
+		// console.log(columns);
+	}, [projects, isError, isSuccess]);
 
 	return (
 		<>
@@ -40,7 +69,7 @@ const Projects = () => {
 						<div className='flex items-center flex-shrink-0 h-10 px-2'>
 							<span className='block text-sm font-semibold'>Backlog</span>
 							<span className='flex items-center justify-center w-5 h-5 ml-2 text-sm font-semibold text-indigo-500 bg-white rounded bg-opacity-30'>
-								6
+								{columns.backlog.length}
 							</span>
 							<button
 								className='flex items-center justify-center w-6 h-6 ml-auto text-indigo-500 rounded hover:bg-indigo-500 hover:text-indigo-100'
@@ -56,82 +85,74 @@ const Projects = () => {
 							</button>
 						</div>
 						<div className='flex flex-col pb-2 overflow-auto scrollbar'>
-							<Project />
-							<Project />
-							<Project />
-							<Project />
-							<Project />
-							<Project />
+							{columns?.backlog.map((project) => (
+								<Project key={project.id} project={project} />
+							))}
 						</div>
 					</div>
 					<div className='flex flex-col flex-shrink-0 w-72'>
 						<div className='flex items-center flex-shrink-0 h-10 px-2'>
 							<span className='block text-sm font-semibold'>Ready</span>
 							<span className='flex items-center justify-center w-5 h-5 ml-2 text-sm font-semibold text-indigo-500 bg-white rounded bg-opacity-30'>
-								3
+								{columns.ready.length}
 							</span>
 						</div>
 						<div className='flex flex-col pb-2 overflow-auto scrollbar'>
-							<Project />
-							<Project />
-							<Project />
-							<Project />
-							<Project />
+							{columns?.ready.map((project) => (
+								<Project key={project.id} project={project} />
+							))}
 						</div>
 					</div>
 					<div className='flex flex-col flex-shrink-0 w-72'>
 						<div className='flex items-center flex-shrink-0 h-10 px-2'>
 							<span className='block text-sm font-semibold'>Doing</span>
 							<span className='flex items-center justify-center w-5 h-5 ml-2 text-sm font-semibold text-indigo-500 bg-white rounded bg-opacity-30'>
-								2
+								{columns.doing.length}
 							</span>
 						</div>
 						<div className='flex flex-col pb-2 overflow-auto scrollbar'>
-							<Project />
-							<Project />
-							<Project />
-							<Project />
-							<Project />
-							<Project />
+							{columns?.doing.map((project) => (
+								<Project key={project.id} project={project} />
+							))}
 						</div>
 					</div>
 					<div className='flex flex-col flex-shrink-0 w-72'>
 						<div className='flex items-center flex-shrink-0 h-10 px-2'>
 							<span className='block text-sm font-semibold'>Review</span>
 							<span className='flex items-center justify-center w-5 h-5 ml-2 text-sm font-semibold text-indigo-500 bg-white rounded bg-opacity-30'>
-								3
+								{columns.review.length}
 							</span>
 						</div>
 						<div className='flex flex-col pb-2 overflow-auto scrollbar'>
-							<Project />
-							<Project />
+							{columns?.review.map((project) => (
+								<Project key={project.id} project={project} />
+							))}
 						</div>
 					</div>
 					<div className='flex flex-col flex-shrink-0 w-72'>
 						<div className='flex items-center flex-shrink-0 h-10 px-2'>
 							<span className='block text-sm font-semibold'>Blocked</span>
 							<span className='flex items-center justify-center w-5 h-5 ml-2 text-sm font-semibold text-indigo-500 bg-white rounded bg-opacity-30'>
-								1
+								{columns.blocked.length}
 							</span>
 						</div>
 						<div className='flex flex-col pb-2 overflow-auto scrollbar'>
-							<Project />
-							<Project />
-							<Project />
+							{columns?.blocked.map((project) => (
+								<Project key={project.id} project={project} />
+							))}
 						</div>
 					</div>
 					<div className='flex flex-col flex-shrink-0 w-72'>
 						<div className='flex items-center flex-shrink-0 h-10 px-2'>
 							<span className='block text-sm font-semibold'>Done</span>
 							<span className='flex items-center justify-center w-5 h-5 ml-2 text-sm font-semibold text-indigo-500 bg-white rounded bg-opacity-30'>
-								3
+								{columns.done.length}
 							</span>
 						</div>
 						<div className='flex flex-col pb-2 overflow-auto scrollbar'>
-							<Project />
-							<Project />
-							<Project />
-							<Project />
+							{columns?.done.map((project) => (
+								<Project key={project.id} project={project} />
+							))}
 						</div>
 					</div>
 					<div className='flex-shrink-0 w-6' />

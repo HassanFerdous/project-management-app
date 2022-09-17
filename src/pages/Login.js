@@ -1,15 +1,28 @@
 import React from 'react';
+import { useEffect } from 'react';
 import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { useLoginMutation } from '../features/auth/authApi';
+import useAuth from '../hooks/useAuth';
 import logoLws from '../images/logo.png';
 function Login() {
 	const [email, setEmail] = useState('');
 	const [password, setPassword] = useState('');
-	const [login, { isLoading }] = useLoginMutation();
+	const [login, { isLoading, isSuccess }] = useLoginMutation();
+	const navigate = useNavigate();
+	const isLoggedIn = useAuth();
+
+	useEffect(() => {
+		navigate('/teams', { replace: true });
+	}, [isLoggedIn, navigate]);
 
 	const handleSubmit = (e) => {
 		e.preventDefault();
 		login({ email, password });
+
+		if (isSuccess) {
+			navigate('/teams', { replace: true });
+		}
 	};
 
 	return (

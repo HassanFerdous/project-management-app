@@ -1,16 +1,61 @@
+import moment from 'moment';
 import React from 'react';
+import { useRef } from 'react';
+import { useState } from 'react';
+import { useDeleteProjectMutation } from '../features/project/projectApi';
+import { useOnClickOutside } from '../utils';
 
-export default function Project() {
+export default function Project({ project }) {
+	const [showMenu, setShowMenu] = useState(false);
+	const ref = useRef();
+	const [deleteProject] = useDeleteProjectMutation();
+	const { name, title, createdAt, stage, id, author } = project;
+
+	useOnClickOutside(ref, () => {
+		if (showMenu) {
+			setShowMenu(false);
+		}
+	});
+
+	const handleDeleteProject = () => {
+		console.log('clicked');
+		let confirm = window.confirm('do you want delete the project?');
+		if (!confirm) return;
+		deleteProject({ id, author });
+	};
+
 	return (
 		<div
 			className='relative flex flex-col items-start p-4 mt-3 bg-white rounded-lg cursor-pointer bg-opacity-90 group hover:bg-opacity-100'
 			draggable='true'>
+			{stage === 'backlog' && (
+				<>
+					<button
+						className='absolute top-0 right-0 flex items-center justify-center hidden w-5 h-5 mt-3 mr-2 text-gray-500 rounded hover:bg-gray-200 hover:text-gray-700 group-hover:flex'
+						onClick={() => setShowMenu(!showMenu)}>
+						<svg
+							className='w-4 h-4 fill-current'
+							xmlns='http://www.w3.org/2000/svg'
+							viewBox='0 0 20 20'
+							fill='currentColor'>
+							<path d='M10 6a2 2 0 110-4 2 2 0 010 4zM10 12a2 2 0 110-4 2 2 0 010 4zM10 18a2 2 0 110-4 2 2 0 010 4z' />
+						</svg>
+					</button>
+					{showMenu && (
+						<button
+							ref={ref}
+							className='absolute top-2 right-2 text-xs leading-xs bg-red-200 text-red-600 py-1 px-2 rounded-full'
+							onClick={handleDeleteProject}>
+							Delete
+						</button>
+					)}
+				</>
+			)}
+
 			<span className='flex items-center h-6 px-3 text-xs font-semibold text-green-500 bg-green-100 rounded-full'>
-				Dev
+				{name}
 			</span>
-			<h4 className='mt-3 text-sm font-medium'>
-				This is the title of the card for the thing that needs to be done.
-			</h4>
+			<h4 className='mt-3 text-sm font-medium'>{title}</h4>
 			<div className='flex items-center w-full mt-3 text-xs font-medium text-gray-400'>
 				<div className='flex items-center'>
 					<svg
@@ -24,7 +69,7 @@ export default function Project() {
 							clipRule='evenodd'
 						/>
 					</svg>
-					<span className='ml-1 leading-none'>Dec 12</span>
+					<span className='ml-1 leading-none'>{moment(createdAt).format('MMM Do YY')}</span>
 				</div>
 				<img
 					className='w-6 h-6 ml-auto rounded-full'
