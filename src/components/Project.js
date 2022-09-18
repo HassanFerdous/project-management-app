@@ -10,7 +10,7 @@ export default function Project({ project }) {
 	const [showMenu, setShowMenu] = useState(false);
 	const ref = useRef();
 	const [deleteProject] = useDeleteProjectMutation();
-	const { name, title, createdAt, stage, id, author } = project;
+	const { team: teamName, title, createdAt, stage, id, author } = project;
 
 	useOnClickOutside(ref, () => {
 		if (showMenu) {
@@ -65,7 +65,7 @@ export default function Project({ project }) {
 			)}
 
 			<span className='flex items-center h-6 px-3 text-xs font-semibold text-green-500 bg-green-100 rounded-full'>
-				{name}
+				{teamName}
 			</span>
 			<h4 className='mt-3 text-sm font-medium'>{title}</h4>
 			<div className='flex items-center w-full mt-3 text-xs font-medium text-gray-400'>

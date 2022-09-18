@@ -5,7 +5,7 @@ import Input from '../Input';
 import Modal from './modal';
 
 function AddProjectModal({ control }) {
-	const [formData, setFormData] = useState({ name: '', title: '', avatar: '' });
+	const [formData, setFormData] = useState({ team: '', title: '', avatar: '' });
 	const [addNewProject, { isLoading }] = useAddNewProjectMutation();
 	const { email: loggedInUserEmail } = useSelector((state) => state.auth.user);
 
@@ -18,12 +18,11 @@ function AddProjectModal({ control }) {
 		e.preventDefault();
 		addNewProject({
 			author: loggedInUserEmail,
-			members: [loggedInUserEmail],
 			stage: 'backlog',
 			...formData,
 			createdAt: new Date(),
 		});
-		setFormData({ name: '', title: '', avatar: '' });
+		setFormData({ team: '', title: '', avatar: '' });
 		control(false);
 	};
 	return (
@@ -31,11 +30,11 @@ function AddProjectModal({ control }) {
 			<form onSubmit={handleSubmit}>
 				<Input
 					type='text'
-					placeholder='Project Name'
-					name='name'
+					placeholder='Team name'
+					name='team'
 					required
 					onChange={handleChange}
-					value={formData?.name}
+					value={formData?.team}
 				/>
 				<Input
 					type='text'

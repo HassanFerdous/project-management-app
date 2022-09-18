@@ -163,68 +163,31 @@
       ],
       "createdAt": "2022-09-17T09:37:06.083Z",
       "id": 8
+    },
+    {
+      "name": "design",
+      "title": "hello world",
+      "author": {
+        "email": "test@gmail.com",
+        "name": "test",
+        "id": 2
+      },
+      "members": [
+        "test@gmail.com"
+      ],
+      "createdAt": "2022-09-18T15:10:37.226Z",
+      "id": 9
     }
   ],
   "projects": [
     {
-      "author": "ferdous@gmail.com",
-      "members": [
-        "ferdous@gmail.com"
-      ],
-      "stage": "review",
-      "name": "todo",
-      "title": "todo application",
-      "avatar": "sdfsdfsdfsdf",
-      "createdAt": "2022-09-17T16:56:24.424Z",
-      "id": 4
-    },
-    {
-      "author": "ferdous@gmail.com",
-      "members": [
-        "ferdous@gmail.com"
-      ],
-      "stage": "ready",
-      "name": "sdfsdfdsf",
-      "title": "sdfsdf",
-      "avatar": "sdfsdfdsf",
-      "createdAt": "2022-09-18T07:31:51.950Z",
-      "id": 5
-    },
-    {
-      "author": "ferdous@gmail.com",
-      "members": [
-        "ferdous@gmail.com"
-      ],
-      "stage": "backlog",
-      "name": "sdfsdfsdf",
-      "title": "sdfdsfdsf",
-      "avatar": "sdfsdfdsfdsf",
-      "createdAt": "2022-09-18T07:31:57.892Z",
-      "id": 6
-    },
-    {
-      "author": "ferdous@gmail.com",
-      "members": [
-        "ferdous@gmail.com"
-      ],
-      "stage": "doing",
-      "name": "sdfsdfs",
-      "title": "sdfsdfsdf",
-      "avatar": "sdfdsfsdfd",
-      "createdAt": "2022-09-18T07:32:04.692Z",
-      "id": 7
-    },
-    {
       "author": "test@gmail.com",
-      "members": [
-        "test@gmail.com"
-      ],
       "stage": "backlog",
-      "name": "test",
-      "title": "test",
-      "avatar": "setwssfsdf",
-      "createdAt": "2022-09-18T09:09:46.590Z",
-      "id": 8
+      "team": "design",
+      "title": "make ui design from dashboard",
+      "avatar": "sdfdsfsdf",
+      "createdAt": "2022-09-18T16:20:51.987Z",
+      "id": 1
     }
   ]
 }
