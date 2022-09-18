@@ -18,8 +18,10 @@ function AddProjectModal({ control }) {
 		e.preventDefault();
 		addNewProject({
 			author: loggedInUserEmail,
+			team: formData?.team.toLowerCase(),
+			title: formData?.title,
+			avatar: formData?.avatar,
 			stage: 'backlog',
-			...formData,
 			createdAt: new Date(),
 		});
 		setFormData({ team: '', title: '', avatar: '' });
