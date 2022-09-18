@@ -177,17 +177,81 @@
       ],
       "createdAt": "2022-09-18T15:10:37.226Z",
       "id": 9
+    },
+    {
+      "name": "marketing",
+      "title": "sdfsdfdsf",
+      "author": {
+        "email": "test@gmail.com",
+        "name": "test",
+        "id": 2
+      },
+      "members": [
+        "test@gmail.com"
+      ],
+      "createdAt": "2022-09-18T18:09:56.384Z",
+      "id": 10
+    },
+    {
+      "name": "marn stack",
+      "title": "sdfsdfdsf",
+      "author": {
+        "email": "test@gmail.com",
+        "name": "test",
+        "id": 2
+      },
+      "members": [
+        "test@gmail.com"
+      ],
+      "createdAt": "2022-09-18T18:31:22.310Z",
+      "id": 11
     }
   ],
   "projects": [
     {
       "author": "test@gmail.com",
-      "stage": "backlog",
+      "stage": "doing",
       "team": "design",
       "title": "make ui design from dashboard",
       "avatar": "sdfdsfsdf",
       "createdAt": "2022-09-18T16:20:51.987Z",
       "id": 1
+    },
+    {
+      "author": "test@gmail.com",
+      "stage": "doing",
+      "team": "Design",
+      "title": "sdfds",
+      "avatar": "sdfdsf",
+      "createdAt": "2022-09-18T16:28:09.591Z",
+      "id": 2
+    },
+    {
+      "author": "test@gmail.com",
+      "team": "marketing",
+      "title": "sdfsdf",
+      "avatar": "sdfdsfdsf",
+      "stage": "ready",
+      "createdAt": "2022-09-18T16:32:35.288Z",
+      "id": 4
+    },
+    {
+      "author": "test@gmail.com",
+      "team": "mern stack",
+      "title": "sdfsdf",
+      "avatar": "sdfsdf",
+      "stage": "ready",
+      "createdAt": "2022-09-18T18:31:35.111Z",
+      "id": 6
+    },
+    {
+      "author": "mike@gmail.com",
+      "team": "design",
+      "title": "sdfsdf",
+      "avatar": "sdfsdfsdf",
+      "stage": "backlog",
+      "createdAt": "2022-09-18T18:58:18.776Z",
+      "id": 7
     }
   ]
 }

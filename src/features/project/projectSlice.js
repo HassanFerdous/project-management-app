@@ -3,12 +3,15 @@ import { createSlice } from '@reduxjs/toolkit';
 const projectSlice = createSlice({
 	name: 'project',
 	initialState: {
-		project: [],
+		assignedProjectsQuery: '',
 	},
 
 	reducers: {
-		loadProjects: (state, action) => {
-			state.project = action.payload;
+		setAssignedProjectsQuery: (state, action) => {
+			state.assignedProjectsQuery = action.payload;
 		},
 	},
 });
+
+export const { setAssignedProjectsQuery } = projectSlice.actions;
+export default projectSlice.reducer;

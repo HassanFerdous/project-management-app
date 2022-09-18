@@ -13,6 +13,14 @@ const teamApi = apiSlice.injectEndpoints({
 			},
 		}),
 
+		getTeamById: builder.query({
+			query: (id) => {
+				return {
+					url: `/teams?id=${id}`,
+				};
+			},
+		}),
+
 		addTeam: builder.mutation({
 			query: (data) => ({
 				url: '/teams',
@@ -40,4 +48,5 @@ const teamApi = apiSlice.injectEndpoints({
 	}),
 });
 
+export default teamApi;
 export const { useGetTeamsQuery, useAddTeamMutation, useUpdateTeamMutation } = teamApi;

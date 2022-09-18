@@ -1,12 +1,13 @@
 import apiSlice from '../api/apiSlice';
 const projectApi = apiSlice.injectEndpoints({
 	endpoints: (builder) => ({
-		//fetch project
+		//fetch project if user assigned to the project or owner of the project
 		fetchProjects: builder.query({
 			query: (query) => {
-				let { email, sort, order } = query || {};
+				let { assignedProjectsQuery, author, sort, order } = query || {};
 				let queryString = '';
-				if (email) queryString += `members_like=${email}`;
+				if (assignedProjectsQuery) queryString += assignedProjectsQuery;
+				if (author) query += `&author=${author}`;
 				if (sort) queryString += `&_sort=${sort}`;
 				if (order) queryString += `&_order=${order}`;
 
@@ -23,14 +24,16 @@ const projectApi = apiSlice.injectEndpoints({
 				method: 'POST',
 				body: data,
 			}),
-			async onQueryStarted(arg, { queryFulfilled, dispatch }) {
+			invalidatesTags: ['Project'],
+			async onQueryStarted(arg, { queryFulfilled, dispatch, getState }) {
+				let { assignedProjectsQuery } = getState().projects;
 				try {
 					const { data: newProject } = await queryFulfilled;
 					if (newProject?.id) {
 						dispatch(
 							projectApi.util.updateQueryData(
 								'fetchProjects',
-								{ email: newProject.author, sort: 'id', order: 'desc' },
+								{ assignedProjectsQuery, sort: 'id', order: 'desc' },
 								(draft) => {
 									draft.unshift(newProject);
 								}
@@ -55,11 +58,19 @@ const projectApi = apiSlice.injectEndpoints({
 				};
 			},
 
-			async onQueryStarted(arg, { queryFulfilled, dispatch }) {
+			// invalidatesTags: ['Project'],
+
+			async onQueryStarted(arg, { queryFulfilled, dispatch, getState }) {
+				let { assignedProjectsQuery } = getState().projects;
+
 				const patch = dispatch(
 					projectApi.util.updateQueryData(
 						'fetchProjects',
-						{ email: arg.email, sort: 'id', order: 'desc' },
+						{
+							assignedProjectsQuery,
+							sort: 'id',
+							order: 'desc',
+						},
 						(draft) => {
 							return (draft = draft.map((project) =>
 								project.id === arg.id ? { ...project, stage: arg.stage } : project
@@ -81,13 +92,15 @@ const projectApi = apiSlice.injectEndpoints({
 				url: `/projects/${id}`,
 				method: 'DELETE',
 			}),
-			async onQueryStarted(arg, { queryFulfilled, dispatch }) {
+			invalidatesTags: ['Project'],
+			async onQueryStarted(arg, { queryFulfilled, dispatch, getState }) {
+				let { assignedProjectsQuery } = getState().projects || {};
 				try {
 					await queryFulfilled;
 					dispatch(
 						projectApi.util.updateQueryData(
 							'fetchProjects',
-							{ email: arg.author, sort: 'id', order: 'desc' },
+							{ assignedProjectsQuery, sort: 'id', order: 'desc' },
 							(draft) => {
 								return (draft = draft.filter((project) => project.id !== arg.id));
 							}
