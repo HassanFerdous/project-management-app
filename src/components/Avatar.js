@@ -2,7 +2,6 @@ import React from 'react';
 import { useRef } from 'react';
 import { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { useNavigate } from 'react-router-dom';
 import { logout } from '../features/auth/authSlice';
 import { useOnClickOutside } from '../utils';
 
@@ -10,13 +9,11 @@ export default function Avatar() {
 	const infoRef = useRef();
 	const [showInfo, setShowInfo] = useState(false);
 	const dispatch = useDispatch();
-	const navigate = useNavigate();
 	const { user } = useSelector((state) => state.auth) || {};
 
 	//logout
 	const handleLogOut = () => {
 		dispatch(logout());
-		navigate('/', { replace: true });
 	};
 
 	//click-outside

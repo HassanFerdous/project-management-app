@@ -10,8 +10,8 @@ export default function useAuthCheck() {
 		let auth = JSON.parse(localStorage.getItem('auth'));
 		if (auth && auth.user && auth.accessToken) {
 			dispatch(signin({ user: auth.user, accessToken: auth.accessToken }));
-			setAuthChecked(true);
 		}
+		setAuthChecked(true);
 	}, [dispatch]);
 
 	return authChecked;
