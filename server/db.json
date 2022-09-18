@@ -231,7 +231,7 @@
       "team": "marketing",
       "title": "sdfsdf",
       "avatar": "sdfdsfdsf",
-      "stage": "ready",
+      "stage": "doing",
       "createdAt": "2022-09-18T16:32:35.288Z",
       "id": 4
     },
@@ -240,7 +240,7 @@
       "team": "mern stack",
       "title": "sdfsdf",
       "avatar": "sdfsdf",
-      "stage": "backlog",
+      "stage": "ready",
       "createdAt": "2022-09-18T18:31:35.111Z",
       "id": 6
     },
@@ -267,7 +267,7 @@
       "team": "development",
       "title": "hello devolpers",
       "avatar": "sdfsdfsdf",
-      "stage": "backlog",
+      "stage": "doing",
       "createdAt": "2022-09-18T20:02:38.687Z",
       "id": 9
     }

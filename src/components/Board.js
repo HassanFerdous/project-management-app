@@ -49,7 +49,7 @@ function Board() {
 	return (
 		<>
 			<div className='flex flex-grow px-10 mt-4 space-x-6 overflow-auto'>
-				{isLoading && <Loader />}
+				{isLoading && <Loader message='loading...' />}
 				{!isLoading && isError && <Error message='some thing went wrong' />}
 
 				{!isError && isSuccess && (
