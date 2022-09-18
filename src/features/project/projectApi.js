@@ -46,28 +46,32 @@ const projectApi = apiSlice.injectEndpoints({
 		//update project
 		updateProject: builder.mutation({
 			query: ({ id, email, stage }) => {
+				let toUpdate = {};
+				if (stage) toUpdate = { ...toUpdate, stage };
 				return {
-					query: `/projects/${id}`,
+					url: `/projects/${id}`,
 					method: 'PATCH',
-					body: { stage },
+					body: toUpdate,
 				};
 			},
 
 			async onQueryStarted(arg, { queryFulfilled, dispatch }) {
+				const patch = dispatch(
+					projectApi.util.updateQueryData(
+						'fetchProjects',
+						{ email: arg.email, sort: 'id', order: 'desc' },
+						(draft) => {
+							return (draft = draft.map((project) =>
+								project.id === arg.id ? { ...project, stage: arg.stage } : project
+							));
+						}
+					)
+				);
 				try {
 					await queryFulfilled;
-					dispatch(
-						projectApi.util.updateQueryData(
-							'fetchProjects',
-							{ email: arg.email, sort: 'id', order: 'desc' },
-							(draft) => {
-								return (draft = draft.map((project) =>
-									project.id === arg.id ? { ...project, stage: arg.stage } : project
-								));
-							}
-						)
-					);
-				} catch (error) {}
+				} catch (error) {
+					patch.undo();
+				}
 			},
 		}),
 

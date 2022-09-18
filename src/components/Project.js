@@ -2,6 +2,7 @@ import moment from 'moment';
 import React from 'react';
 import { useRef } from 'react';
 import { useState } from 'react';
+import { useDrag } from 'react-dnd';
 import { useDeleteProjectMutation } from '../features/project/projectApi';
 import { useOnClickOutside } from '../utils';
 
@@ -18,16 +19,27 @@ export default function Project({ project }) {
 	});
 
 	const handleDeleteProject = () => {
-		console.log('clicked');
 		let confirm = window.confirm('do you want delete the project?');
 		if (!confirm) return;
 		deleteProject({ id, author });
 	};
 
+	// dnd
+	const [{ isDragging }, drag] = useDrag(() => ({
+		type: 'card',
+		item: { id, stage },
+		collect: (monitor) => ({
+			isDragging: monitor.isDragging(),
+		}),
+	}));
+
 	return (
 		<div
-			className='relative flex flex-col items-start p-4 mt-3 bg-white rounded-lg cursor-pointer bg-opacity-90 group hover:bg-opacity-100'
-			draggable='true'>
+			className={`relative flex flex-col items-start p-4 mt-3 bg-white rounded-lg cursor-pointer bg-opacity-90 group hover:bg-opacity-100 ${
+				isDragging ? 'opacity-50' : null
+			}`}
+			draggable='true'
+			ref={drag}>
 			{stage === 'backlog' && (
 				<>
 					<button
