@@ -6,7 +6,7 @@ const projectApi = apiSlice.injectEndpoints({
 			query: (query) => {
 				let { email, sort, order } = query || {};
 				let queryString = '';
-				if (email) queryString += email;
+				if (email) queryString += `members_like=${email}`;
 				if (sort) queryString += `&_sort=${sort}`;
 				if (order) queryString += `&_order=${order}`;
 
