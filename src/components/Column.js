@@ -46,8 +46,9 @@ function Column({ projects, stage, control }) {
 					)}
 				</div>
 				<div
-					className={`min-h-screen flex flex-col pb-2 overflow-auto scrollbar min-h ${isOver && 'bg-green-100'}`}
-					ref={drop}>
+					className={`flex flex-col pb-2 overflow-auto scrollbar min-h ${isOver && 'bg-green-100'}`}
+					ref={drop}
+					style={{ minHeight: '80vh' }}>
 					{filteredProjects?.map((project) => (
 						<Project key={project.id} project={project} />
 					))}
