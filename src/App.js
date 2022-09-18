@@ -1,14 +1,17 @@
 import React from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-import PrivateRoute from './components/PrivateRout';
+import PrivateRoute from './components/PrivateRoute';
 import useAuthCheck from './hooks/useAuthCheck';
 import Login from './pages/Login';
 import Projects from './pages/Projects';
 import Teams from './pages/Teams';
 
 function App() {
-	useAuthCheck();
-	return (
+	const authChecked = useAuthCheck();
+
+	return !authChecked ? (
+		<div>Checking authentication....</div>
+	) : (
 		<>
 			<Router>
 				<Routes>

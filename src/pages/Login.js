@@ -2,27 +2,28 @@ import React from 'react';
 import { useEffect } from 'react';
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import Error from '../components/ui/Error';
 import { useLoginMutation } from '../features/auth/authApi';
-import useAuth from '../hooks/useAuth';
 import logoLws from '../images/logo.png';
 function Login() {
 	const [email, setEmail] = useState('');
 	const [password, setPassword] = useState('');
-	const [login, { isLoading, isSuccess }] = useLoginMutation();
+	const [login, { data, isLoading, error: responseError }] = useLoginMutation();
 	const navigate = useNavigate();
-	const isLoggedIn = useAuth();
+	const [error, setError] = useState('');
 
 	useEffect(() => {
-		navigate('/teams', { replace: true });
-	}, [isLoggedIn, navigate]);
+		if (responseError?.data) {
+			setError(responseError.data);
+		}
+		if (data?.accessToken && data?.user) {
+			navigate('/teams');
+		}
+	}, [data, responseError, navigate]);
 
 	const handleSubmit = (e) => {
 		e.preventDefault();
 		login({ email, password });
-
-		if (isSuccess) {
-			navigate('/teams', { replace: true });
-		}
 	};
 
 	return (
@@ -79,6 +80,8 @@ function Login() {
 							</button>
 						</div>
 					</form>
+
+					{error !== '' && <Error message={error} />}
 				</div>
 			</div>
 		</div>
