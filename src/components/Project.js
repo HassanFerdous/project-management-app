@@ -10,7 +10,7 @@ export default function Project({ project }) {
 	const [showMenu, setShowMenu] = useState(false);
 	const ref = useRef();
 	const [deleteProject] = useDeleteProjectMutation();
-	const { team: teamName, title, createdAt, stage, id, author } = project;
+	const { team: teamName, title, createdAt, stage, id, author, match } = project;
 
 	useOnClickOutside(ref, () => {
 		if (showMenu) {
@@ -36,8 +36,8 @@ export default function Project({ project }) {
 	return (
 		<div
 			className={`relative flex flex-col items-start p-4 mt-3 bg-white rounded-lg cursor-pointer bg-opacity-90 group hover:bg-opacity-100 ${
-				isDragging ? 'opacity-50' : null
-			}`}
+				match && 'border-2 border-indigo-600'
+			}  ${isDragging ? 'opacity-50' : null}`}
 			draggable='true'
 			ref={drag}>
 			{stage === 'backlog' && (

@@ -5,8 +5,16 @@ import Avatar from '../components/Avatar';
 import Board from '../components/Board';
 import { DndProvider } from 'react-dnd';
 import { HTML5Backend } from 'react-dnd-html5-backend';
+import { debounce } from '../utils';
+import { useDispatch } from 'react-redux';
+import { search } from '../features/project/projectSlice';
 
 const Projects = () => {
+	const dispatch = useDispatch();
+
+	const handleSearch = (e) => {
+		dispatch(search(e.target.value));
+	};
 	return (
 		<>
 			<div className='flex flex-col w-screen h-screen overflow-auto text-gray-700 bg-gradient-to-tr from-blue-200 via-indigo-200 to-pink-200'>
@@ -16,6 +24,7 @@ const Projects = () => {
 						className='flex items-center h-10 px-4 ml-10 text-sm bg-gray-200 rounded-full focus:outline-none focus:ring'
 						type='search'
 						placeholder='Search for anything…'
+						onChange={debounce(handleSearch, 400)}
 					/>
 					<div className='ml-10 grow'>
 						<Link className='mx-2 text-sm font-semibold text-gray-600 hover:text-indigo-700' to='/teams'>
