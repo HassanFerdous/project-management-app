@@ -24,3 +24,4 @@ yarn-error.log*
 html_template
 server
 server/node_modules
+.env

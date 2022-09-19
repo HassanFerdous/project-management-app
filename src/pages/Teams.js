@@ -22,7 +22,7 @@ function Teams() {
 	const { data: teams, isLoading, isSuccess, isError } = useGetTeamsQuery(user.email);
 	let content = null;
 
-	if (isLoading) content = <Loader />;
+	if (isLoading) content = <Loader message='Loading assigned teams...' />;
 	if (!isLoading && isError) content = <Error message='some thing went wrong' />;
 	if (!isLoading && !isError && teams.length === 0) content = <p>You are not assigned to any team!!</p>;
 	if (!isLoading && isSuccess && teams.length) content = teams.map((team) => <Team key={team.id} team={team} />);
