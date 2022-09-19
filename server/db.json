@@ -52,8 +52,8 @@
   "teams": [
     {
       "name": "dev",
-      "title": "sdfdsf",
-      "color": "sdfsdf",
+      "title": "develope a static blog website",
+      "color": "#0d47a1",
       "author": {
         "email": "ferdous@gmail.com",
         "name": "ferdous",
@@ -62,13 +62,13 @@
       "members": [
         "ferdous@gmail.com"
       ],
-      "createdAt": "2022-09-19T11:48:52.460Z",
+      "createdAt": "2022-09-19T16:32:50.199Z",
       "id": 1
     },
     {
       "name": "design",
-      "title": "sdfsf",
-      "color": "sdfsdf",
+      "title": "design a bloging page",
+      "color": "#388e3c",
       "author": {
         "email": "ferdous@gmail.com",
         "name": "ferdous",
@@ -77,13 +77,13 @@
       "members": [
         "ferdous@gmail.com"
       ],
-      "createdAt": "2022-09-19T11:50:11.491Z",
+      "createdAt": "2022-09-19T16:33:43.348Z",
       "id": 2
     },
     {
-      "name": "marketing",
-      "title": "sdfsdf",
-      "color": "sfsdfs",
+      "name": "mern-stack",
+      "title": "mern-stack developer's team",
+      "color": "#e64a19",
       "author": {
         "email": "ferdous@gmail.com",
         "name": "ferdous",
@@ -92,44 +92,124 @@
       "members": [
         "ferdous@gmail.com"
       ],
-      "createdAt": "2022-09-19T11:51:43.185Z",
-      "id": 4
+      "createdAt": "2022-09-19T16:34:26.822Z",
+      "id": 3
     },
     {
-      "name": "mern",
-      "title": "sdfsdf",
-      "color": "sdfsdf",
+      "name": "dev-2",
+      "title": "this is dev-2 team",
+      "color": "#d81b60",
       "author": {
         "email": "ferdous@gmail.com",
         "name": "ferdous",
         "id": 1
       },
       "members": [
-        "ferdous@gmail.com",
-        "mike@gmail.com"
+        "ferdous@gmail.com"
       ],
-      "createdAt": "2022-09-19T11:51:56.562Z",
+      "createdAt": "2022-09-19T16:51:53.736Z",
+      "id": 4
+    },
+    {
+      "name": "tech",
+      "title": "this is tech",
+      "color": "asdflkjsdfdf",
+      "author": {
+        "email": "ferdous@gmail.com",
+        "name": "ferdous",
+        "id": 1
+      },
+      "members": [
+        "ferdous@gmail.com"
+      ],
+      "createdAt": "2022-09-19T17:23:25.103Z",
       "id": 5
+    },
+    {
+      "name": "marketing",
+      "title": "marketing team will work here",
+      "color": "sdfsdfsdf",
+      "author": {
+        "email": "ferdous@gmail.com",
+        "name": "ferdous",
+        "id": 1
+      },
+      "members": [
+        "ferdous@gmail.com"
+      ],
+      "createdAt": "2022-09-19T17:26:08.987Z",
+      "id": 6
+    },
+    {
+      "name": "backend",
+      "title": "this backend team",
+      "color": "#ffca28",
+      "author": {
+        "email": "ferdous@gmail.com",
+        "name": "ferdous",
+        "id": 1
+      },
+      "members": [
+        "ferdous@gmail.com"
+      ],
+      "createdAt": "2022-09-19T17:27:06.431Z",
+      "id": 7
     }
   ],
   "projects": [
     {
       "author": "ferdous@gmail.com",
-      "team": "dev",
-      "title": "sdfsdf",
-      "avatar": "sdfsdf",
-      "stage": "doing",
-      "createdAt": "2022-09-19T10:27:47.822Z",
+      "team": "mern-stack",
+      "title": "develop mern stack project with rtk-query",
+      "avatar": "sdfsdfsdf",
+      "stage": "backlog",
+      "createdAt": "2022-09-19T16:36:42.185Z",
       "id": 1
     },
     {
-      "author": "mike@gmail.com",
-      "team": "mern",
-      "title": "dsfdsf",
-      "avatar": "dsfsdfsdf",
+      "author": "ferdous@gmail.com",
+      "team": "design",
+      "title": "this task for design team",
+      "avatar": "asdfsdfsdf",
       "stage": "ready",
-      "createdAt": "2022-09-19T12:06:52.575Z",
+      "createdAt": "2022-09-19T16:37:04.033Z",
       "id": 2
+    },
+    {
+      "author": "ferdous@gmail.com",
+      "team": "dev",
+      "title": "this task for dev team",
+      "avatar": "sdfsdfds",
+      "stage": "review",
+      "createdAt": "2022-09-19T16:37:19.459Z",
+      "id": 3
+    },
+    {
+      "author": "ferdous@gmail.com",
+      "team": "dev",
+      "title": "dev task 2",
+      "avatar": "sdfsdfds",
+      "stage": "doing",
+      "createdAt": "2022-09-19T16:37:50.752Z",
+      "id": 4
+    },
+    {
+      "author": "ferdous@gmail.com",
+      "team": "tech",
+      "title": "sdfsdf",
+      "avatar": "sdfsdf",
+      "stage": "blocked",
+      "createdAt": "2022-09-19T17:24:23.751Z",
+      "id": 5
+    },
+    {
+      "author": "ferdous@gmail.com",
+      "team": "backend",
+      "title": "create a ecommerce rest-api",
+      "avatar": "sdfsfsdfsdfsdf",
+      "stage": "backlog",
+      "createdAt": "2022-09-19T17:28:15.514Z",
+      "id": 6
     }
   ]
 }

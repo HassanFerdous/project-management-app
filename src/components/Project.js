@@ -4,13 +4,13 @@ import { useRef } from 'react';
 import { useState } from 'react';
 import { useDrag } from 'react-dnd';
 import { useDeleteProjectMutation } from '../features/project/projectApi';
-import { useOnClickOutside } from '../utils';
+import { hexToRGB, useOnClickOutside } from '../utils';
 
 export default function Project({ project }) {
 	const [showMenu, setShowMenu] = useState(false);
 	const ref = useRef();
 	const [deleteProject] = useDeleteProjectMutation();
-	const { team: teamName, title, createdAt, stage, id, author, match } = project;
+	const { team: teamName, title, createdAt, stage, id, author, match, color } = project;
 
 	useOnClickOutside(ref, () => {
 		if (showMenu) {
@@ -64,7 +64,9 @@ export default function Project({ project }) {
 				</>
 			)}
 
-			<span className='flex items-center h-6 px-3 text-xs font-semibold text-green-500 bg-green-100 rounded-full'>
+			<span
+				className='flex items-center h-6 px-3 text-xs font-semibold text-green-500 bg-green-100 rounded-full'
+				style={{ backgroundColor: hexToRGB(color, 0.2), color: hexToRGB(color) }}>
 				{teamName}
 			</span>
 			<h4 className='mt-3 text-sm font-medium'>{title}</h4>

@@ -24,8 +24,7 @@ function Teams() {
 
 	if (isLoading) content = <Loader />;
 	if (!isLoading && isError) content = <Error message='some thing went wrong' />;
-	if (!isLoading && !isError && teams.length === 0)
-		content = <p>You are not assigned to any team. please create a team!!</p>;
+	if (!isLoading && !isError && teams.length === 0) content = <p>You are not assigned to any team!!</p>;
 	if (!isLoading && isSuccess && teams.length) content = teams.map((team) => <Team key={team.id} team={team} />);
 
 	return (

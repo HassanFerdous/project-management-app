@@ -2,13 +2,13 @@ import React, { useRef } from 'react';
 import { useState } from 'react';
 import AddMemberModal from './modals/addMemberModal';
 import moment from 'moment';
-import { useOnClickOutside } from '../utils';
+import { hexToRGB, useOnClickOutside } from '../utils';
 import { useSelector } from 'react-redux';
 import { useDeleteTeamMutation } from '../features/team/teamApi';
 
 export default function Team({ team }) {
 	const [showAddMemberForm, setShowAddMemberForm] = useState(false);
-	const { name, title, createdAt, members, id, author } = team || {};
+	const { name, title, createdAt, members, id, author, color } = team || {};
 	const [showMenu, setShowMenu] = useState(false);
 	const menuRef = useRef();
 	const { email: loggedInUserEmail } = useSelector((state) => state.auth.user);
@@ -53,7 +53,9 @@ export default function Team({ team }) {
 					<path d='M10 6a2 2 0 110-4 2 2 0 010 4zM10 12a2 2 0 110-4 2 2 0 010 4zM10 18a2 2 0 110-4 2 2 0 010 4z' />
 				</svg>
 			</button>
-			<span className='flex items-center h-6 px-3 text-xs font-semibold text-pink-500 bg-pink-100 rounded-full'>
+			<span
+				className='flex items-center h-6 px-3 text-xs font-semibold text-green-500 bg-green-100 rounded-full'
+				style={{ backgroundColor: hexToRGB(color, 0.2), color: hexToRGB(color) }}>
 				{name}
 			</span>
 			<div className='members mt-2 flex items-center flex-wrap'>

@@ -14,8 +14,17 @@ function AddTeamModal({ control }) {
 
 	const handleSubmit = (e) => {
 		e.preventDefault();
-		addTeam({ name: name.toLowerCase(), title, color, author: user, members: [user?.email], createdAt: new Date() });
-		control(false);
+		if (name.length && title.length && color.length) {
+			addTeam({
+				name: name.toLowerCase(),
+				title,
+				color,
+				author: user,
+				members: [user?.email],
+				createdAt: new Date(),
+			});
+			control(false);
+		}
 	};
 
 	return (

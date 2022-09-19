@@ -13,10 +13,11 @@ function Board() {
 	const { email: loggedInUserEmail } = useSelector((state) => state?.auth?.user) || {};
 	const { assignedProjectsQuery } = useSelector((state) => state.projects);
 	const dispatch = useDispatch();
+	const [projects, setProjects] = useState([]);
 
 	//fetch Assign project
 	const {
-		data: projects,
+		data: allProjects,
 		isSuccess,
 		isError,
 		isLoading,
@@ -39,6 +40,20 @@ function Board() {
 			setIsSkip(false);
 		}
 	}, [teams, teamsLoading, teamsLoadingSuccess, dispatch]);
+
+	//transform project to put the correct team color
+	useEffect(() => {
+		let projects = allProjects?.map((project) => {
+			for (let { name, color } of teams) {
+				if (name === project.team) {
+					project = { ...project, color };
+				}
+			}
+			return project;
+		});
+
+		setProjects(projects);
+	}, [allProjects, teams]);
 
 	//control modal
 	const [showModal, setShowModal] = useState(false);
