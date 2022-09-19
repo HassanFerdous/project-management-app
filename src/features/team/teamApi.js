@@ -1,3 +1,4 @@
+import { current } from '@reduxjs/toolkit';
 import apiSlice from '../api/apiSlice';
 
 const teamApi = apiSlice.injectEndpoints({
@@ -8,17 +9,6 @@ const teamApi = apiSlice.injectEndpoints({
 					url: `/teams?members_like=${email}`,
 				};
 			},
-			providesTags: (result, error, arg) => {
-				return result ? [...result.map(({ id }) => ({ type: 'Team', id }), 'Team')] : 'Team';
-			},
-		}),
-
-		getTeamById: builder.query({
-			query: (id) => {
-				return {
-					url: `/teams?id=${id}`,
-				};
-			},
 		}),
 
 		addTeam: builder.mutation({
@@ -27,7 +17,19 @@ const teamApi = apiSlice.injectEndpoints({
 				method: 'POST',
 				body: data,
 			}),
-			invalidatesTags: ['Team'],
+
+			async onQueryStarted(arg, { queryFulfilled, dispatch }) {
+				try {
+					let { data: team } = await queryFulfilled;
+					let { email } = team.author;
+					dispatch(
+						teamApi.util.updateQueryData('getTeams', email, (draft) => {
+							console.log(current(draft));
+							draft.push(team);
+						})
+					);
+				} catch (error) {}
+			},
 		}),
 
 		updateTeam: builder.mutation({
@@ -41,8 +43,21 @@ const teamApi = apiSlice.injectEndpoints({
 					body: updatedTeam,
 				};
 			},
-			invalidatesTags: (result, error, arg) => {
-				return [{ type: 'Team', id: arg?.id }];
+
+			async onQueryStarted(arg, { queryFulfilled, dispatch }) {
+				try {
+					let { data: updatedTeam } = await queryFulfilled;
+					let { email } = updatedTeam.author;
+					dispatch(
+						teamApi.util.updateQueryData('getTeams', email, (draft) => {
+							return draft.map((team) =>
+								team.id === updatedTeam.id ? { ...team, members: updatedTeam.members } : team
+							);
+						})
+					);
+				} catch (error) {
+					console.log(error);
+				}
 			},
 		}),
 	}),

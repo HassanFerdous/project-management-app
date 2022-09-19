@@ -3,15 +3,6 @@ import { useState } from 'react';
 import AddMemberModal from './modals/addMemberModal';
 import moment from 'moment';
 
-function stringToHslColor(str, s = 40, l = 60) {
-	var hash = 0;
-	for (var i = 0; i < str.length; i++) {
-		hash = str.charCodeAt(i) + ((hash << 5) - hash);
-	}
-
-	var h = hash % 360;
-	return 'hsl(' + h + ', ' + s + '%, ' + l + '%)';
-}
 export default function Team({ team }) {
 	const [showAddMemberForm, setShowAddMemberForm] = useState(false);
 	const { name, title, createdAt, members, id } = team || {};
@@ -35,9 +26,7 @@ export default function Team({ team }) {
 					<path d='M10 6a2 2 0 110-4 2 2 0 010 4zM10 12a2 2 0 110-4 2 2 0 010 4zM10 18a2 2 0 110-4 2 2 0 010 4z' />
 				</svg>
 			</button>
-			<span
-				className='flex items-center h-6 px-3 text-xs font-semibold text-pink-500 bg-pink-100 rounded-full'
-				style={{ backgroundColor: stringToHslColor(name, 30, 90), color: stringToHslColor(name, 80, 60) }}>
+			<span className='flex items-center h-6 px-3 text-xs font-semibold text-pink-500 bg-pink-100 rounded-full'>
 				{name}
 			</span>
 			<div className='members mt-2 flex items-center flex-wrap'>

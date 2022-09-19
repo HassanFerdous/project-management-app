@@ -24,7 +24,7 @@ const apiSlice = createApi({
 		}
 		return result;
 	},
-	tagTypes: ['Team'],
+	// tagTypes: ['Team'],
 	endpoints: () => ({}),
 });
 
