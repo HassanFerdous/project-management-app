@@ -10,7 +10,7 @@ export default function Project({ project }) {
 	const [showMenu, setShowMenu] = useState(false);
 	const ref = useRef();
 	const [deleteProject] = useDeleteProjectMutation();
-	const { team: teamName, title, createdAt, stage, id, author, match, color } = project;
+	const { team: teamName, title, createdAt, stage, id, author, match, color, avatar } = project;
 
 	useOnClickOutside(ref, () => {
 		if (showMenu) {
@@ -87,7 +87,11 @@ export default function Project({ project }) {
 				</div>
 				<img
 					className='w-6 h-6 ml-auto rounded-full'
-					src='https://randomuser.me/api/portraits/women/48.jpg'
+					src={
+						avatar.match('https://')
+							? avatar
+							: 'https://www.pngitem.com/pimgs/m/581-5813504_avatar-dummy-png-transparent-png.png'
+					}
 					alt=''
 				/>
 			</div>
