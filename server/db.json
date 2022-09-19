@@ -105,7 +105,8 @@
         "id": 1
       },
       "members": [
-        "ferdous@gmail.com"
+        "ferdous@gmail.com",
+        "mike@gmail.com"
       ],
       "createdAt": "2022-09-19T16:51:53.736Z",
       "id": 4
@@ -135,7 +136,8 @@
         "id": 1
       },
       "members": [
-        "ferdous@gmail.com"
+        "ferdous@gmail.com",
+        "john@gmail.com"
       ],
       "createdAt": "2022-09-19T17:26:08.987Z",
       "id": 6
@@ -154,6 +156,21 @@
       ],
       "createdAt": "2022-09-19T17:27:06.431Z",
       "id": 7
+    },
+    {
+      "name": "fun",
+      "title": "do some chill",
+      "color": "#d500f9",
+      "author": {
+        "email": "ferdous@gmail.com",
+        "name": "ferdous",
+        "id": 1
+      },
+      "members": [
+        "ferdous@gmail.com"
+      ],
+      "createdAt": "2022-09-19T17:34:53.943Z",
+      "id": 8
     }
   ],
   "projects": [
@@ -210,6 +227,15 @@
       "stage": "backlog",
       "createdAt": "2022-09-19T17:28:15.514Z",
       "id": 6
+    },
+    {
+      "author": "ferdous@gmail.com",
+      "team": "fun",
+      "title": "let's do some funny stuff",
+      "avatar": "sdfsdsdfsdf",
+      "stage": "blocked",
+      "createdAt": "2022-09-19T17:35:26.365Z",
+      "id": 7
     }
   ]
 }
