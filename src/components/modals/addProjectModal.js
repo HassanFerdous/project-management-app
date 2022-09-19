@@ -4,10 +4,12 @@ import { useAddNewProjectMutation } from '../../features/project/projectApi';
 import Input from '../Input';
 import Modal from './modal';
 
-function AddProjectModal({ control }) {
+function AddProjectModal({ control, assignedTeams }) {
 	const [formData, setFormData] = useState({ team: '', title: '', avatar: '' });
 	const [addNewProject, { isLoading }] = useAddNewProjectMutation();
 	const { email: loggedInUserEmail } = useSelector((state) => state.auth.user);
+	const [error, setError] = useState(false);
+	const [errorMsg, setErrorMsg] = useState('');
 
 	const handleChange = (e) => {
 		let target = e.target;
@@ -16,6 +18,14 @@ function AddProjectModal({ control }) {
 
 	const handleSubmit = (e) => {
 		e.preventDefault();
+		const isAssigned = assignedTeams.map((team) => team.name.toLowerCase()).includes(formData.team.toLowerCase());
+		if (!isAssigned) {
+			setError(true);
+			setErrorMsg(`You are not assigned to "${formData.team}" team`);
+			return;
+		}
+		setError(false);
+		setErrorMsg(``);
 		addNewProject({
 			author: loggedInUserEmail,
 			team: formData?.team.toLowerCase(),
@@ -38,6 +48,8 @@ function AddProjectModal({ control }) {
 					onChange={handleChange}
 					value={formData?.team}
 				/>
+				{error && <p className='text-xs text-red-500'>{errorMsg}</p>}
+
 				<Input
 					type='text'
 					placeholder='Title'

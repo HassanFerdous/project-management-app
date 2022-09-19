@@ -64,7 +64,7 @@ function Board() {
 				)}
 			</div>
 
-			{showModal && <AddProjectModal control={control} />}
+			{showModal && <AddProjectModal control={control} assignedTeams={teams} />}
 		</>
 	);
 }
