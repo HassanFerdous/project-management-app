@@ -52,18 +52,17 @@
   "teams": [
     {
       "name": "dev",
-      "title": "hello devs",
-      "color": "sdfsdfsdf",
+      "title": "sdfdsf",
+      "color": "sdfsdf",
       "author": {
         "email": "ferdous@gmail.com",
         "name": "ferdous",
         "id": 1
       },
       "members": [
-        "ferdous@gmail.com",
-        "mike@gmail.com"
+        "ferdous@gmail.com"
       ],
-      "createdAt": "2022-09-19T10:22:34.178Z",
+      "createdAt": "2022-09-19T11:48:52.460Z",
       "id": 1
     }
   ],

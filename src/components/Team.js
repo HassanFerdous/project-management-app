@@ -1,14 +1,41 @@
-import React from 'react';
+import React, { useRef } from 'react';
 import { useState } from 'react';
 import AddMemberModal from './modals/addMemberModal';
 import moment from 'moment';
+import { useOnClickOutside } from '../utils';
+import { useSelector } from 'react-redux';
+import { useDeleteTeamMutation } from '../features/team/teamApi';
 
 export default function Team({ team }) {
 	const [showAddMemberForm, setShowAddMemberForm] = useState(false);
-	const { name, title, createdAt, members, id } = team || {};
+	const { name, title, createdAt, members, id, author } = team || {};
+	const [showMenu, setShowMenu] = useState(false);
+	const menuRef = useRef();
+	const { email: loggedInUserEmail } = useSelector((state) => state.auth.user);
+	const [deleteError, setDeleteError] = useState(false);
+	const [deleteTeam, { isLoading }] = useDeleteTeamMutation();
+	const control = (value) => {
+		setShowAddMemberForm(value);
+	};
 
-	const toggleAddMemberForm = () => {
-		setShowAddMemberForm(!showAddMemberForm);
+	useOnClickOutside(menuRef, () => {
+		if (showMenu) {
+			setShowMenu(false);
+		}
+	});
+
+	const handleDeleteTeam = () => {
+		if (author.email !== loggedInUserEmail) {
+			setDeleteError(true);
+			setTimeout(() => {
+				setDeleteError(false);
+			}, 2000);
+
+			return;
+		}
+
+		deleteTeam({ id, email: loggedInUserEmail });
+		setShowMenu(false);
 	};
 
 	return (
@@ -17,7 +44,7 @@ export default function Team({ team }) {
 			draggable='true'>
 			<button
 				className='absolute top-0 right-0 flex items-center justify-center hidden w-5 h-5 mt-3 mr-2 text-gray-500 rounded hover:bg-gray-200 hover:text-gray-700 group-hover:flex'
-				onClick={toggleAddMemberForm}>
+				onClick={() => setShowMenu(!showMenu)}>
 				<svg
 					className='w-4 h-4 fill-current'
 					xmlns='http://www.w3.org/2000/svg'
@@ -58,7 +85,24 @@ export default function Team({ team }) {
 				</div>
 			</div>
 
-			{showAddMemberForm && <AddMemberModal toggleModal={toggleAddMemberForm} members={members} teamId={id} />}
+			{showMenu && (
+				<div className='bg-white border border border-slate-500	absolute right-2 top-2' ref={menuRef}>
+					<p
+						className='text-xs leading-sm px-6 border-b border-slate-500 cursor-pointer'
+						onClick={() => control(true)}>
+						Add member
+					</p>
+					<button
+						className='text-xs leading-sm px-6 cursor-pointer bg-transparent py-0 block'
+						disabled={isLoading}
+						onClick={handleDeleteTeam}>
+						Delete Team
+					</button>
+					{deleteError && <p className='text-xs leading-xs text-red-500'>Only author can delete team</p>}
+				</div>
+			)}
+
+			{showAddMemberForm && <AddMemberModal control={control} members={members} teamId={id} />}
 		</div>
 	);
 }

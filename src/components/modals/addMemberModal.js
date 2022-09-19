@@ -6,7 +6,7 @@ import { useUpdateTeamMutation } from '../../features/team/teamApi';
 import { useGetUsersQuery } from '../../features/user/userApi';
 import { debounce, useOnClickOutside } from '../../utils';
 
-export default function AddMemberModal({ toggleModal, members, teamId }) {
+export default function AddMemberModal({ control, members, teamId }) {
 	const [error, setError] = useState(false);
 	const [errorMessage, setErrorMessage] = useState('');
 	const [defaultOptions, setDefaultOptions] = useState([]);
@@ -17,7 +17,7 @@ export default function AddMemberModal({ toggleModal, members, teamId }) {
 	const ref = useRef();
 
 	useOnClickOutside(ref, () => {
-		toggleModal();
+		control(false);
 	});
 
 	//load option
@@ -62,7 +62,7 @@ export default function AddMemberModal({ toggleModal, members, teamId }) {
 		//handle empty value
 		if (!selectedMember?.value?.trim().length || members.includes(selectedMember?.value)) return;
 		updatedTeam({ id: teamId, members: [...members, selectedMember?.value] });
-		toggleModal();
+		control(false);
 	};
 
 	return (
@@ -89,7 +89,7 @@ export default function AddMemberModal({ toggleModal, members, teamId }) {
 				<button
 					className='ml-2 inline-block w-auto px-2 py-1 py-1 bg-red-300 rounded font-semibold text-sm order-1 text-xs leading-3'
 					type='button'
-					onClick={toggleModal}>
+					onClick={() => control(false)}>
 					Cancel
 				</button>
 			</div>

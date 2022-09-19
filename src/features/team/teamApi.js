@@ -1,4 +1,3 @@
-import { current } from '@reduxjs/toolkit';
 import apiSlice from '../api/apiSlice';
 
 const teamApi = apiSlice.injectEndpoints({
@@ -24,7 +23,6 @@ const teamApi = apiSlice.injectEndpoints({
 					let { email } = team.author;
 					dispatch(
 						teamApi.util.updateQueryData('getTeams', email, (draft) => {
-							console.log(current(draft));
 							draft.push(team);
 						})
 					);
@@ -62,12 +60,17 @@ const teamApi = apiSlice.injectEndpoints({
 		}),
 
 		deleteTeam: builder.mutation({
-			query: ({ id, author }) => `/teams/${id}`,
+			query: ({ id, email }) => {
+				return {
+					url: `/teams/${id}`,
+					method: 'DELETE',
+				};
+			},
 			async onQueryStarted(arg, { queryFulfilled, dispatch }) {
 				try {
 					await queryFulfilled;
 					dispatch(
-						teamApi.util.updateQueryData('getTeams', arg.author, (draft) => {
+						teamApi.util.updateQueryData('getTeams', arg.email, (draft) => {
 							return draft.filter((team) => team.id !== arg.id);
 						})
 					);
@@ -80,4 +83,4 @@ const teamApi = apiSlice.injectEndpoints({
 });
 
 export default teamApi;
-export const { useGetTeamsQuery, useAddTeamMutation, useUpdateTeamMutation } = teamApi;
+export const { useGetTeamsQuery, useAddTeamMutation, useUpdateTeamMutation, useDeleteTeamMutation } = teamApi;
