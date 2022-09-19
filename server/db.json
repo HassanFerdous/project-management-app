@@ -67,5 +67,15 @@
       "id": 1
     }
   ],
-  "projects": []
+  "projects": [
+    {
+      "author": "ferdous@gmail.com",
+      "team": "dev",
+      "title": "sdfsdf",
+      "avatar": "sdfsdf",
+      "stage": "doing",
+      "createdAt": "2022-09-19T10:27:47.822Z",
+      "id": 1
+    }
+  ]
 }

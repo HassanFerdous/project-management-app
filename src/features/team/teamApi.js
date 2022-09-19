@@ -60,6 +60,22 @@ const teamApi = apiSlice.injectEndpoints({
 				}
 			},
 		}),
+
+		deleteTeam: builder.mutation({
+			query: ({ id, author }) => `/teams/${id}`,
+			async onQueryStarted(arg, { queryFulfilled, dispatch }) {
+				try {
+					await queryFulfilled;
+					dispatch(
+						teamApi.util.updateQueryData('getTeams', arg.author, (draft) => {
+							return draft.filter((team) => team.id !== arg.id);
+						})
+					);
+				} catch (error) {
+					console.log(error);
+				}
+			},
+		}),
 	}),
 });
 

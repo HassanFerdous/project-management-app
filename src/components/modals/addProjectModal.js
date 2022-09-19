@@ -21,7 +21,7 @@ function AddProjectModal({ control, assignedTeams }) {
 		const isAssigned = assignedTeams.map((team) => team.name.toLowerCase()).includes(formData.team.toLowerCase());
 		if (!isAssigned) {
 			setError(true);
-			setErrorMsg(`You are not assigned to "${formData.team}" team`);
+			setErrorMsg(`You are not assigned to "${formData.team}" or team not exist!!`);
 			return;
 		}
 		setError(false);
