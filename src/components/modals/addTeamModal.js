@@ -14,7 +14,7 @@ function AddTeamModal({ control }) {
 
 	const handleSubmit = (e) => {
 		e.preventDefault();
-		addTeam({ name, title, color, author: user, members: [user?.email], createdAt: new Date() });
+		addTeam({ name: name.toLowerCase(), title, color, author: user, members: [user?.email], createdAt: new Date() });
 		control(false);
 	};
 

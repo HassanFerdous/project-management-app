@@ -64,6 +64,52 @@
       ],
       "createdAt": "2022-09-19T11:48:52.460Z",
       "id": 1
+    },
+    {
+      "name": "design",
+      "title": "sdfsf",
+      "color": "sdfsdf",
+      "author": {
+        "email": "ferdous@gmail.com",
+        "name": "ferdous",
+        "id": 1
+      },
+      "members": [
+        "ferdous@gmail.com"
+      ],
+      "createdAt": "2022-09-19T11:50:11.491Z",
+      "id": 2
+    },
+    {
+      "name": "marketing",
+      "title": "sdfsdf",
+      "color": "sfsdfs",
+      "author": {
+        "email": "ferdous@gmail.com",
+        "name": "ferdous",
+        "id": 1
+      },
+      "members": [
+        "ferdous@gmail.com"
+      ],
+      "createdAt": "2022-09-19T11:51:43.185Z",
+      "id": 4
+    },
+    {
+      "name": "mern",
+      "title": "sdfsdf",
+      "color": "sdfsdf",
+      "author": {
+        "email": "ferdous@gmail.com",
+        "name": "ferdous",
+        "id": 1
+      },
+      "members": [
+        "ferdous@gmail.com",
+        "mike@gmail.com"
+      ],
+      "createdAt": "2022-09-19T11:51:56.562Z",
+      "id": 5
     }
   ],
   "projects": [
@@ -75,6 +121,15 @@
       "stage": "doing",
       "createdAt": "2022-09-19T10:27:47.822Z",
       "id": 1
+    },
+    {
+      "author": "mike@gmail.com",
+      "team": "mern",
+      "title": "dsfdsf",
+      "avatar": "dsfsdfsdf",
+      "stage": "ready",
+      "createdAt": "2022-09-19T12:06:52.575Z",
+      "id": 2
     }
   ]
 }

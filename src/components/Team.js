@@ -29,7 +29,7 @@ export default function Team({ team }) {
 			setDeleteError(true);
 			setTimeout(() => {
 				setDeleteError(false);
-			}, 2000);
+			}, 3000);
 
 			return;
 		}
@@ -86,20 +86,26 @@ export default function Team({ team }) {
 			</div>
 
 			{showMenu && (
-				<div className='bg-white border border border-slate-500	absolute right-2 top-2' ref={menuRef}>
-					<p
-						className='text-xs leading-sm px-6 border-b border-slate-500 cursor-pointer'
-						onClick={() => control(true)}>
-						Add member
-					</p>
-					<button
-						className='text-xs leading-sm px-6 cursor-pointer bg-transparent py-0 block'
-						disabled={isLoading}
-						onClick={handleDeleteTeam}>
-						Delete Team
-					</button>
-					{deleteError && <p className='text-xs leading-xs text-red-500'>Only author can delete team</p>}
-				</div>
+				<>
+					<div className='bg-white border border border-slate-500	absolute right-2 top-2' ref={menuRef}>
+						<p
+							className='text-xs leading-sm px-6 border-b border-slate-500 cursor-pointer'
+							onClick={() => control(true)}>
+							Add member
+						</p>
+						<button
+							className='text-xs leading-sm px-6 cursor-pointer bg-transparent py-0 block'
+							disabled={isLoading}
+							onClick={handleDeleteTeam}>
+							Delete Team
+						</button>
+					</div>
+					{deleteError && (
+						<p className='absolute right-2 bottom-2 text-xs leading-xs text-red-500'>
+							Only author can delete team
+						</p>
+					)}
+				</>
 			)}
 
 			{showAddMemberForm && <AddMemberModal control={control} members={members} teamId={id} />}
