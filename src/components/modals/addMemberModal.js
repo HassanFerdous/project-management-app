@@ -32,7 +32,7 @@ export default function AddMemberModal({ control, members, teamId }) {
 		}
 	};
 
-	//option change
+	//handle option change
 	const handleChange = (member) => {
 		setSelectedMember(member);
 
