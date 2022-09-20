@@ -1,6 +1,7 @@
 import React, { useRef } from 'react';
 import { useEffect } from 'react';
 import { useState } from 'react';
+import { useSelector } from 'react-redux';
 import AsyncSelect from 'react-select/async';
 import { useUpdateTeamMutation } from '../../features/team/teamApi';
 import { useGetUsersQuery } from '../../features/user/userApi';
@@ -15,6 +16,7 @@ export default function AddMemberModal({ control, members, teamId }) {
 	const { data: users, isSuccess: getUsersSuccess } = useGetUsersQuery();
 	const [updatedTeam] = useUpdateTeamMutation();
 	const ref = useRef();
+	const { email: loggedInUserEmail } = useSelector((state) => state.auth.user);
 
 	useOnClickOutside(ref, () => {
 		control(false);
@@ -33,6 +35,13 @@ export default function AddMemberModal({ control, members, teamId }) {
 	//option change
 	const handleChange = (member) => {
 		setSelectedMember(member);
+
+		//check only members can add new member
+		if (!members.includes(loggedInUserEmail)) {
+			setError(true);
+			setErrorMessage('Only members can add new member');
+			return;
+		}
 
 		//exist member
 		if (members.includes(member.value)) {

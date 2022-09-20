@@ -3,6 +3,7 @@ import React from 'react';
 import { useRef } from 'react';
 import { useState } from 'react';
 import { useDrag } from 'react-dnd';
+import { useSelector } from 'react-redux';
 import { useDeleteProjectMutation } from '../features/project/projectApi';
 import { hexToRGB, useOnClickOutside } from '../utils';
 
@@ -11,6 +12,7 @@ export default function Project({ project }) {
 	const ref = useRef();
 	const [deleteProject] = useDeleteProjectMutation();
 	const { team: teamName, title, createdAt, stage, id, author, match, color, avatar } = project;
+	const { email: loggedInUserEmail } = useSelector((state) => state.auth.user);
 
 	useOnClickOutside(ref, () => {
 		if (showMenu) {
@@ -19,6 +21,9 @@ export default function Project({ project }) {
 	});
 
 	const handleDeleteProject = () => {
+		if (loggedInUserEmail !== author) {
+			return alert('Only author can delete the project');
+		}
 		let confirm = window.confirm('do you want delete the project?');
 		if (!confirm) return;
 		deleteProject({ id, author });
