@@ -42,10 +42,11 @@ const teamApi = apiSlice.injectEndpoints({
 				};
 			},
 
-			async onQueryStarted(arg, { queryFulfilled, dispatch }) {
+			async onQueryStarted(arg, { queryFulfilled, dispatch, getState }) {
 				try {
 					let { data: updatedTeam } = await queryFulfilled;
-					let { email } = updatedTeam.author;
+					let { email } = getState().auth?.user;
+
 					dispatch(
 						teamApi.util.updateQueryData('getTeams', email, (draft) => {
 							return draft.map((team) =>

@@ -34,7 +34,7 @@ function AddTeamModal({ control }) {
 				<Input type='text' placeholder='Title' required onChange={(e) => setTitle(e.target.value)} />
 				<Input
 					type='text'
-					placeholder='Any valid hex(#ffffff) color or color name(green)'
+					placeholder='Any valid hex(#ffffff)'
 					required
 					onChange={(e) => setColor(e.target.value)}
 				/>

@@ -82,6 +82,11 @@ function Login() {
 					</form>
 
 					{error !== '' && <Error message={error} />}
+					<p>
+						email: ferdous@gmail.com <br />
+						password: 123456 <br />
+						use this email and password for quick test
+					</p>
 				</div>
 			</div>
 		</div>
