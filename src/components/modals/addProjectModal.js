@@ -40,7 +40,7 @@ function AddProjectModal({ control, assignedTeams }) {
 		<Modal control={control}>
 			<form onSubmit={handleSubmit}>
 				<Select
-					placeholder={'Select team name'}
+					placeholder={'Select team'}
 					options={options}
 					noOptionsMessage={() => 'your not assigned to this team or team not exist'}
 					isSearchable={true}
