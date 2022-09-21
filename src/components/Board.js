@@ -13,11 +13,10 @@ function Board() {
 	const { email: loggedInUserEmail } = useSelector((state) => state?.auth?.user) || {};
 	const { assignedProjectsQuery } = useSelector((state) => state.projects);
 	const dispatch = useDispatch();
-	const [projects, setProjects] = useState([]);
 
 	//fetch Assign project
 	const {
-		data: allProjects,
+		data: projects,
 		isSuccess,
 		isError,
 		isLoading,
@@ -32,6 +31,12 @@ function Board() {
 	//get assigned teams
 	const { data: teams, isLoading: teamsLoading, isSuccess: teamsLoadingSuccess } = useGetTeamsQuery(loggedInUserEmail);
 
+	//control modal
+	const [showModal, setShowModal] = useState(false);
+	const control = (value) => {
+		setShowModal(value);
+	};
+
 	//set assigned Teams query to store
 	useEffect(() => {
 		if (!teamsLoading && teamsLoadingSuccess && teams?.length) {
@@ -41,25 +46,15 @@ function Board() {
 		}
 	}, [teams, teamsLoading, teamsLoadingSuccess, dispatch]);
 
-	//transform project to put the correct team color
-	useEffect(() => {
-		let projects = allProjects?.map((project) => {
-			for (let { name, color } of teams) {
-				if (name === project.team) {
-					project = { ...project, color };
-				}
+	//add correct color to project card
+	let transformedProjects = projects?.map((project) => {
+		for (let { name, color } of teams) {
+			if (name === project.team) {
+				project = { ...project, color };
 			}
-			return project;
-		});
-
-		setProjects(projects);
-	}, [allProjects, teams]);
-
-	//control modal
-	const [showModal, setShowModal] = useState(false);
-	const control = (value) => {
-		setShowModal(value);
-	};
+		}
+		return project;
+	});
 
 	return (
 		<>
@@ -69,12 +64,12 @@ function Board() {
 
 				{!isError && isSuccess && (
 					<>
-						<Column projects={projects} stage='Backlog' control={control}></Column>
-						<Column projects={projects} stage='Ready'></Column>
-						<Column projects={projects} stage='Doing'></Column>
-						<Column projects={projects} stage='Review'></Column>
-						<Column projects={projects} stage='Blocked'></Column>
-						<Column projects={projects} stage='Done'></Column>
+						<Column projects={transformedProjects} stage='Backlog' control={control}></Column>
+						<Column projects={transformedProjects} stage='Ready'></Column>
+						<Column projects={transformedProjects} stage='Doing'></Column>
+						<Column projects={transformedProjects} stage='Review'></Column>
+						<Column projects={transformedProjects} stage='Blocked'></Column>
+						<Column projects={transformedProjects} stage='Done'></Column>
 					</>
 				)}
 			</div>
