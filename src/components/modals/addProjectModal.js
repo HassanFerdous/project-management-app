@@ -3,52 +3,49 @@ import { useSelector } from 'react-redux';
 import { useAddNewProjectMutation } from '../../features/project/projectApi';
 import Input from '../Input';
 import Modal from './modal';
+import Select from 'react-select';
 
 function AddProjectModal({ control, assignedTeams }) {
 	const [formData, setFormData] = useState({ team: '', title: '', avatar: '' });
 	const [addNewProject, { isLoading }] = useAddNewProjectMutation();
 	const { email: loggedInUserEmail } = useSelector((state) => state.auth.user);
-	const [error, setError] = useState(false);
-	const [errorMsg, setErrorMsg] = useState('');
 
+	//handle input change
 	const handleChange = (e) => {
 		let target = e.target;
 		setFormData({ ...formData, [target.name]: target.value });
 	};
 
+	//show assigned teams to select options
+	const options = assignedTeams?.map((team) => ({ label: team.name, value: team.name }));
+
+	//submit add new project from
 	const handleSubmit = (e) => {
 		e.preventDefault();
-		const isAssigned = assignedTeams.map((team) => team.name.toLowerCase()).includes(formData.team.toLowerCase());
-		if (!isAssigned) {
-			setError(true);
-			setErrorMsg(`You are not assigned to "${formData.team}" or "${formData.team}" isn't exist!!`);
-			return;
+		if (formData.title.trim() && formData.team.trim() && formData.avatar.trim()) {
+			addNewProject({
+				author: loggedInUserEmail,
+				team: formData?.team.toLowerCase(),
+				title: formData?.title,
+				avatar: formData?.avatar,
+				stage: 'backlog',
+				createdAt: new Date(),
+			});
+			setFormData({ team: '', title: '', avatar: '' });
+			control(false);
 		}
-		setError(false);
-		setErrorMsg(``);
-		addNewProject({
-			author: loggedInUserEmail,
-			team: formData?.team.toLowerCase(),
-			title: formData?.title,
-			avatar: formData?.avatar,
-			stage: 'backlog',
-			createdAt: new Date(),
-		});
-		setFormData({ team: '', title: '', avatar: '' });
-		control(false);
 	};
+
 	return (
 		<Modal control={control}>
 			<form onSubmit={handleSubmit}>
-				<Input
-					type='text'
-					placeholder='Team name'
-					name='team'
-					required
-					onChange={handleChange}
-					value={formData?.team}
+				<Select
+					placeholder={'Select team name'}
+					options={options}
+					noOptionsMessage={() => 'your not assigned to this team or team not exist'}
+					isSearchable={true}
+					onChange={(selectedOption) => setFormData({ ...formData, team: selectedOption.value })}
 				/>
-				{error && <p className='text-xs text-red-500'>{errorMsg}</p>}
 
 				<Input
 					type='text'

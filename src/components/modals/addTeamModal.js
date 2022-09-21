@@ -14,7 +14,7 @@ function AddTeamModal({ control }) {
 
 	const handleSubmit = (e) => {
 		e.preventDefault();
-		if (name.trim().length && title.trim().length && color.trim().length) {
+		if (name.trim() && title.trim() && color.trim()) {
 			addTeam({
 				name: name.toLowerCase(),
 				title,
