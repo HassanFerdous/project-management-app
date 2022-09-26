@@ -87,7 +87,7 @@ function Login() {
 						email: john@gmail.com <br />
 						email: mike@gmail.com <br />
 						password: 123456 <br />
-						use this emails and password for quick test
+						emails and password for quick test
 					</p>
 				</div>
 			</div>
