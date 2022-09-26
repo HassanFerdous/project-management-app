@@ -21,7 +21,7 @@ function Board() {
 		isError,
 		isLoading,
 	} = useFetchProjectsQuery(
-		{ assignedProjectsQuery, sort: 'id', order: 'desc' },
+		{ assignedProjectsQuery },
 		{
 			skip: isSkip,
 			refetchOnMountOrArgChange: true,

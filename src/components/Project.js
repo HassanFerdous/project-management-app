@@ -26,7 +26,7 @@ export default function Project({ project }) {
 		}
 		let confirm = window.confirm('do you want delete the project?');
 		if (!confirm) return;
-		deleteProject({ id, author });
+		deleteProject({ id });
 	};
 
 	// dnd

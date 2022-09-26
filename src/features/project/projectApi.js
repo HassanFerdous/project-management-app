@@ -3,11 +3,11 @@ const projectApi = apiSlice.injectEndpoints({
 	endpoints: (builder) => ({
 		//fetch project if user assigned to the project or owner of the project
 		fetchProjects: builder.query({
-			query: (query) => {
-				let { assignedProjectsQuery, author, sort, order } = query || {};
+			query: (params) => {
+				let { assignedProjectsQuery, author, sort = 'id', order = 'desc' } = params || {};
 				let queryString = '';
 				if (assignedProjectsQuery) queryString += assignedProjectsQuery;
-				if (author) query += `&author=${author}`;
+				if (author) params += `&author=${author}`;
 				if (sort) queryString += `&_sort=${sort}`;
 				if (order) queryString += `&_order=${order}`;
 
@@ -31,13 +31,9 @@ const projectApi = apiSlice.injectEndpoints({
 					const { data: newProject } = await queryFulfilled;
 					if (newProject?.id) {
 						dispatch(
-							projectApi.util.updateQueryData(
-								'fetchProjects',
-								{ assignedProjectsQuery, sort: 'id', order: 'desc' },
-								(draft) => {
-									draft.unshift(newProject);
-								}
-							)
+							projectApi.util.updateQueryData('fetchProjects', { assignedProjectsQuery }, (draft) => {
+								draft.unshift(newProject);
+							})
 						);
 					}
 				} catch (error) {
@@ -48,17 +44,15 @@ const projectApi = apiSlice.injectEndpoints({
 
 		//update project
 		updateProject: builder.mutation({
-			query: ({ id, email, stage }) => {
-				let toUpdate = {};
-				if (stage) toUpdate = { ...toUpdate, stage };
+			query: ({ id, stage }) => {
+				let data = {};
+				if (stage) data = { ...data, stage };
 				return {
 					url: `/projects/${id}`,
 					method: 'PATCH',
-					body: toUpdate,
+					body: data,
 				};
 			},
-
-			// invalidatesTags: ['Project'],
 
 			async onQueryStarted(arg, { queryFulfilled, dispatch, getState }) {
 				let { assignedProjectsQuery } = getState().projects;
@@ -68,8 +62,6 @@ const projectApi = apiSlice.injectEndpoints({
 						'fetchProjects',
 						{
 							assignedProjectsQuery,
-							sort: 'id',
-							order: 'desc',
 						},
 						(draft) => {
 							return (draft = draft.map((project) =>
@@ -88,7 +80,7 @@ const projectApi = apiSlice.injectEndpoints({
 
 		//delete project
 		deleteProject: builder.mutation({
-			query: ({ id, author }) => ({
+			query: ({ id }) => ({
 				url: `/projects/${id}`,
 				method: 'DELETE',
 			}),
@@ -98,13 +90,9 @@ const projectApi = apiSlice.injectEndpoints({
 				try {
 					await queryFulfilled;
 					dispatch(
-						projectApi.util.updateQueryData(
-							'fetchProjects',
-							{ assignedProjectsQuery, sort: 'id', order: 'desc' },
-							(draft) => {
-								return (draft = draft.filter((project) => project.id !== arg.id));
-							}
-						)
+						projectApi.util.updateQueryData('fetchProjects', { assignedProjectsQuery }, (draft) => {
+							return (draft = draft.filter((project) => project.id !== arg.id));
+						})
 					);
 				} catch (error) {}
 			},

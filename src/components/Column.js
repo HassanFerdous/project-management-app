@@ -7,13 +7,12 @@ import Project from './Project';
 function Column({ projects: allProject, stage, control }) {
 	const [projects, setProjects] = useState([]);
 	const [updateProject] = useUpdateProjectMutation();
-	const { email: loggedInUserEmail } = useSelector((state) => state.auth.user);
 	const { searchString } = useSelector((state) => state.projects);
 
 	//dnd
 	const [{ isOver }, drop] = useDrop(() => ({
 		accept: 'card',
-		drop: (item, monitor) => updateProject({ id: item.id, email: loggedInUserEmail, stage: stage.toLowerCase() }),
+		drop: (item, monitor) => updateProject({ id: item.id, stage: stage.toLowerCase() }),
 		collect: (monitor) => ({
 			isOver: monitor.isOver(),
 		}),
