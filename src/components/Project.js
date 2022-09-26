@@ -21,8 +21,9 @@ export default function Project({ project }) {
 	});
 
 	const handleDeleteProject = () => {
+		console.log(loggedInUserEmail !== author);
 		if (loggedInUserEmail !== author) {
-			return alert('Only author can delete the project');
+			return alert('Your not author of this project. Only author can delete the project');
 		}
 		let confirm = window.confirm('do you want delete the project?');
 		if (!confirm) return;
