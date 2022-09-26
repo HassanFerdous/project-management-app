@@ -84,8 +84,10 @@ function Login() {
 					{error !== '' && <Error message={error} />}
 					<p>
 						email: ferdous@gmail.com <br />
+						email: john@gmail.com <br />
+						email: mike@gmail.com <br />
 						password: 123456 <br />
-						use this email and password for quick test
+						use this emails and password for quick test
 					</p>
 				</div>
 			</div>
